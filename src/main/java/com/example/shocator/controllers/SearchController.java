@@ -18,15 +18,20 @@ public class SearchController {
         return "index";
     }
 
-    @RequestMapping(value = "search", method = RequestMethod.POST)
-    public String searchResults(@RequestParam String name, Model model) {
-
-        String message = "You searched for '" + name + ".'";
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public String searchResults(@RequestParam(value = "phrase") String phrase, Model model) {
+        String message = "You searched for '" + phrase + ".'";
 
         model.addAttribute("message", message);
         model.addAttribute("title", title);
 
         return "search";
+    }
+
+    @RequestMapping(value = "search", method = RequestMethod.POST)
+    public String processSearch(@RequestParam String phrase, Model model) {
+
+        return "redirect:/search?phrase=" + phrase;
     }
 
 }
