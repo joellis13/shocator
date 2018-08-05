@@ -6,8 +6,8 @@
 </head>
 <body>
     <h1 th:text="${title}">Default Title</h1>
-    <form>
-        <input type="text" />
+    <form method="post" action="search">
+        <input type="text" name="name"/>
         <input type="submit" value="Find My Show!" />
     </form>
 </body>
