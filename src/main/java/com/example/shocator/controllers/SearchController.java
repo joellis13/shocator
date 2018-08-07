@@ -31,7 +31,24 @@ public class SearchController {
     @RequestMapping(value = "search", method = RequestMethod.POST)
     public String processSearch(@RequestParam String phrase, Model model) {
 
-        return "redirect:/search?phrase=" + phrase;
+        String urlTemplate = "http://www.omdbapi.com/?apikey=111c0be2&t=";
+        String aURL = urlTemplate + phrase;
+
+        /**
+
+        // Connect to the URL using java's native library
+        URL url = new URL(aURL);
+        URLConnection request = url.openConnection();
+        request.connect();
+        /*
+        // Convert to a JSON object to print data
+        JsonParser jp = new JsonParser(); //from gson
+        JsonElement root = jp.parse(new InputStreamReader((InputStream) request.getContent())); //Convert the input stream to a json element
+        JsonObject rootobj = root.getAsJsonObject(); //May be an array, may be an object.
+        String zipcode = rootobj.get("zip_code").getAsString(); //just grab the zipcode
+        */
+
+        return "redirect:" + aURL;
     }
 
 }
