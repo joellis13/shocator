@@ -6,6 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 @Controller
 public class SearchController {
@@ -33,6 +39,22 @@ public class SearchController {
 
         String urlTemplate = "http://www.omdbapi.com/?apikey=111c0be2&t=";
         String aURL = urlTemplate + phrase;
+        String response = null;
+
+        try {
+            URL url = new URL(aURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setInstanceFollowRedirects(false);
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("charset", "utf-8");
+            connection.connect();
+            InputStream inStream = connection.getInputStream();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
 
         /**
 
